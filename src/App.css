@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+:root {
+  --bg-gradient: linear-gradient(-45deg, #232526, #414345, #1f1c2c, #928dab);
+  --form-bg: rgba(0, 0, 0, 0.2);
+  --form-text: #eee;
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --button-gradient: linear-gradient(
+    135deg,
+    #667db6,
+    #0082c8,
+    #0082c8,
+    #667db6
+  );
+  --button-text: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 20px;
+  width: 100%;
+  max-width: 1600px;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.contact-container {
+  backdrop-filter: blur(18px);
+  background: var(--form-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  color: var(--form-text);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--form-text);
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input:focus,
+textarea:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+textarea {
+  resize: none;
+}
+
+/* Bouton halo animé */
+button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--button-gradient);
+  border: none;
+  color: var(--button-text);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3),
+    transparent 70%
+  );
+  animation: halo 3s infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+button:hover::before {
+  opacity: 1;
+}
+
+@keyframes halo {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+/* message cards */
+
+.messages-section {
+  backdrop-filter: blur(18px);
+  background: var(--form-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 1400px;
+  color: var(--form-text);
+}
+
+.messages-section > p {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.messages-section .error-message {
+  color: red;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 20px;
+}
+
+.message-card {
+  background-color: var(--input-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.2rem;
+  border-radius: 1rem;
+  width: calc((100% - (2 * 1.2rem)) / 3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 250px;
+
+  position: relative; /* IMPORTANT: Nécessaire pour positionner le pseudo-élément */
+  overflow: hidden; /* IMPORTANT: Cache le débordement du halo */
+
+  /* MODIFIÉ : La transition ne concerne plus que 'transform' pour l'agrandissement */
+  transition: transform 0.3s ease;
+}
+
+.message-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1),
+    /* TRES SUBTIL : opacité réduite */ transparent 70%
+  );
+  animation: halo 3s infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.message-card:hover {
+  transform: scale(1.03); /* S'agrandit légèrement comme le bouton */
+  cursor: pointer; /* Indique qu'elle est interactive */
+  /* Les box-shadow, background-color, border-color ont été retirés pour être IDENTIQUE au bouton */
+}
+
+.message-card:hover::before {
+  opacity: 1; /* Le halo apparaît au survol */
+}
+
+.message-card p {
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.message-card p:last-child {
+  margin-bottom: 0;
+}
+
+.message-card .message-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.7rem;
+  color: var(--form-text);
+}
+
+.message-card .message-email {
+  opacity: 0.8;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.message-card .message-content {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.message-card .message-date {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  font-style: italic;
+  text-align: right;
+  margin-top: 1.2rem;
+  color: var(--form-text);
+}
