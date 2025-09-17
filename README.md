@@ -49,7 +49,7 @@ Cette application frontend communique avec une API RESTful pour la soumission et
 * URL de l'API Backend : http://localhost:3000 (adresse par défaut pour le développement local)
 * Dépôt GitHub du Backend : Vous pouvez trouver le code source de l'API backend ici :
 
-https://github.com/MChaker01/formulaire_contact_backend.git
+https://github.com/MChaker01/formulaire-contact-backend.git
 
 
 ## Fonctionnalités
